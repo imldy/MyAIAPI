@@ -16,7 +16,7 @@
 
 ### 初步实现
 
-遇到 [Error codes](https://platform.openai.com/docs/guides/error-codes/error-codes) 自动切换下一个key。
+遇到 [Error codes](https://platform.openai.com/docs/guides/error-codes/error-codes) 自动切换下一个key。（当前实现为随机下一个，且存在BUG `TypeError: This ReadableStream is disturbed (has already been read from), and cannot be used as a body`）
 
 ### 后续实现
 
