@@ -24,10 +24,14 @@ async function handleRequest(request) {
     let outbound;
     let host;
     let apikey;
-    let headers;
-    let modifiedRequest;
     let response;
-    const requestClone = request.clone()
+    // 一个修改后的请求
+    let modifiedRequest = new Request(url.toString(), {
+        headers: request.headers,
+        method: request.method,
+        body: request.body,
+        redirect: 'follow'
+    });
     while (true) {
         // 随机选择一个出口
         outbound = getRandomElement(outbounds);
@@ -37,17 +41,10 @@ async function handleRequest(request) {
 
         // 修改URL中的Host
         url.host = host;
+        modifiedRequest.url = url.toString()
         // 修改请求头
-        headers = new Headers(requestClone.headers);
-        headers.set('Authorization', 'Bearer ' + apikey);
+        modifiedRequest.headers.set('Authorization', 'Bearer ' + apikey);
 
-        // 一个修改后的请求
-        modifiedRequest = new Request(url.toString(), {
-            headers: headers,
-            method: requestClone.method,
-            body: requestClone.body,
-            redirect: 'follow'
-        });
         // 发起请求，得到响应
         response = await fetch(modifiedRequest);
         console.log('inbound_apikey[' + inbound_apikey + ']=>outbound[' + host + '@' + apikey + '] code[' + response.status + ']')
