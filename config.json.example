@@ -1,0 +1,26 @@
+{
+    "inbounds": [
+        {
+            "apikey": "sk-t1",
+            "name": "第一个测试key"
+        },
+        {
+            "apikey": "sk-t2",
+            "name": "第二个测试key"
+        }
+    ],
+    "outbounds": [
+        {
+            "host": "api.ohmygpt.com",
+            "apikeys": [
+                "sk-111"
+            ]
+        },
+        {
+            "host": "api.openai.imldy.cn",
+            "apikeys": [
+                "sk-222"
+            ]
+        }
+    ]
+}
