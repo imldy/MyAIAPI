@@ -39,7 +39,6 @@ async function handleRequest(request) {
         body: request.body,
         redirect: 'follow'
     });
-    while (true) {
         // 随机选择一个出口
         outbound = getRandomElement(outbounds);
         // 随机获得一个host和key
@@ -55,10 +54,7 @@ async function handleRequest(request) {
         // 发起请求，得到响应
         response = await fetch(modifiedRequest);
         console.log('inbound[' + inbound.name + '@' + inbound.apikey + ']=>outbound[' + host + '@' + apikey + '] code[' + response.status + ']')
-        if (response.status < 400) {
             return response;
-        }
-    }
 }
 
 
