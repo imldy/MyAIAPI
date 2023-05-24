@@ -1,5 +1,7 @@
 // const TELEGRAPH_URL = 'https://api.openai.com';
+const inbounds = [
 
+]
 const outbounds = [
 
 ]
@@ -14,9 +16,14 @@ async function handleRequest(request) {
     const inbound_apikey = getApiKey(request.headers)
 
     // todo: 判断传入的apikey是否正确
-
-    // 如果正确
-
+    const inbound = getInbound(inbound_apikey)
+    // 如果不正确，返回401
+    if (!inbound) {
+        return new Response(null, {
+            status: 401,
+            statusText: 'Unauthorized'
+        })
+    }
     // 得到一个完整的URL
     const url = new URL(request.url);
 
@@ -57,6 +64,14 @@ async function handleRequest(request) {
 
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function getInbound(apiKey) {
+    for (let i = 0; i < inbounds.length; i++) {
+        if (inbounds[i].apikey === apiKey) {
+            return inbounds[i]
+        }
+    }
 }
 
 function getApiKey(headers) {
