@@ -54,7 +54,7 @@ async function handleRequest(request) {
 
         // 发起请求，得到响应
         response = await fetch(modifiedRequest);
-        console.log('inbound_apikey[' + inbound_apikey + ']=>outbound[' + host + '@' + apikey + '] code[' + response.status + ']')
+        console.log('inbound[' + inbound.name + '@' + inbound.apikey + ']=>outbound[' + host + '@' + apikey + '] code[' + response.status + ']')
         if (response.status < 400) {
             return response;
         }
