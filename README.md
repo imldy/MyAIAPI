@@ -1,6 +1,6 @@
 # 我的 AI API
 
-负载均衡OpenAI或第三方AI接口。
+使用 Cloudflare Workers 负载均衡 OpenAI 或第三方 AI 接口。
 
 ## 负载均衡策略
 
