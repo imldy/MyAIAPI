@@ -32,13 +32,6 @@ async function handleRequest(request) {
     let host;
     let apikey;
     let response;
-    // 一个修改后的请求
-    let modifiedRequest = new Request(url.toString(), {
-        headers: request.headers,
-        method: request.method,
-        body: request.body,
-        redirect: 'follow'
-    });
         // 随机选择一个出口
         outbound = getRandomElement(outbounds);
         // 随机获得一个host和key
@@ -47,7 +40,13 @@ async function handleRequest(request) {
 
         // 修改URL中的Host
         url.host = host;
-        modifiedRequest.url = url.toString()
+        // 一个修改后的请求
+        let modifiedRequest = new Request(url.toString(), {
+            headers: request.headers,
+            method: request.method,
+            body: request.body,
+            redirect: 'follow'
+        });
         // 修改请求头
         modifiedRequest.headers.set('Authorization', 'Bearer ' + apikey);
 
